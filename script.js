@@ -7,13 +7,12 @@ let preCounter = 10;
 const display = document.getElementById('display');
 const statusText = document.getElementById('status');
 
-// He actualizado la función para aceptar el 'tipo' de onda (default 'square' para que suene más a alarma)
 function playBeep(freq, type = 'square') {
     const context = new (window.AudioContext || window.webkitAudioContext)();
     const osc = context.createOscillator();
     const gain = context.createGain();
     
-    osc.type = type; // Ahora usamos 'square' para un sonido más marcado
+    osc.type = type;
     osc.frequency.setValueAtTime(freq, context.currentTime);
     gain.gain.setValueAtTime(0.2, context.currentTime);
     
@@ -56,17 +55,14 @@ document.getElementById('startBtn').addEventListener('click', () => {
     
     timerId = setInterval(() => {
         if (isPreCounting) {
-            // LÓGICA NUEVA: Solo suena si quedan 3 segundos o menos
-            if (preCounter <= 3 && preCounter > 0) {
-                playBeep(440); 
-            }
-            
+            if (preCounter <= 3 && preCounter > 0) playBeep(440);
             display.innerText = preCounter;
             
             if (preCounter <= 0) {
                 isPreCounting = false;
                 statusText.innerText = "¡EN MARCHA!";
-                playBeep(800); // Sonido de inicio
+                display.classList.add('running-pulse'); // <--- PULSO: Inicia animación
+                playBeep(800);
             } else {
                 preCounter--;
             }
@@ -76,17 +72,14 @@ document.getElementById('startBtn').addEventListener('click', () => {
 
             if (runningTime === 30) speakText("Halfway there");
             else if (runningTime === 10) speakText("Ten seconds");
-
-            // Sonidos de cuenta regresiva final
-            if (runningTime <= 3 && runningTime > 0) {
-                playBeep(700);
-            }
+            else if (runningTime <= 3 && runningTime > 0) playBeep(700);
 
             if (runningTime <= 0) {
                 clearInterval(timerId);
                 timerId = null;
                 playBeep(1000);
                 statusText.innerText = "¡TIEMPO!";
+                display.classList.remove('running-pulse'); // <--- PULSO: Finaliza animación
             }
         }
     }, 1000);
@@ -96,6 +89,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
     clearInterval(timerId);
     timerId = null;
     statusText.innerText = "Pausado";
+    display.classList.remove('running-pulse'); // <--- PULSO: Pausa animación
 });
 
 document.getElementById('resetBtn').addEventListener('click', () => {
@@ -105,14 +99,6 @@ document.getElementById('resetBtn').addEventListener('click', () => {
     runningTime = 0;
     isPreCounting = false;
     statusText.innerText = "Preparado";
+    display.classList.remove('running-pulse'); // <--- PULSO: Resetea animación
     updateDisplay(0);
 });
-
-// Registro del Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then((reg) => console.log('Service Worker registrado:', reg))
-            .catch((err) => console.log('Error al registrar Service Worker:', err));
-    });
-}
