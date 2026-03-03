@@ -107,3 +107,12 @@ document.getElementById('resetBtn').addEventListener('click', () => {
     statusText.innerText = "Preparado";
     updateDisplay(0);
 });
+
+// Registro del Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((reg) => console.log('Service Worker registrado:', reg))
+            .catch((err) => console.log('Error al registrar Service Worker:', err));
+    });
+}
