@@ -1,0 +1,24 @@
+body { 
+    background-color: #121212; 
+    color: #e0e0e0; 
+    font-family: sans-serif; 
+    display: flex; justify-content: center; align-items: center; 
+    height: 100vh; margin: 0;
+}
+
+.timer-container { text-align: center; width: 90%; max-width: 400px; }
+
+#display { font-size: 5rem; font-weight: bold; margin-bottom: 20px; color: #00e676; }
+
+.controls-grid { display: flex; justify-content: space-around; margin-bottom: 20px; }
+
+.control-group { display: flex; flex-direction: column; align-items: center; }
+
+button { padding: 15px 25px; font-size: 1.5rem; margin: 5px; cursor: pointer; border-radius: 10px; border: none; }
+
+.control-group button { background: #333; color: white; width: 70px; }
+
+.action-buttons button { width: 100%; margin: 5px 0; }
+.btn-green { background: #00c853; color: white; }
+.btn-red { background: #d50000; color: white; }
+.btn-gray { background: #424242; color: white; }
