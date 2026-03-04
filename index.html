@@ -3,33 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer Pro con Pre-conteo</title>
+    <title>Timer Pro PWA</title>
+    
     <link rel="stylesheet" href="style.css">
-
+    
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <link rel="icon" href="icon.png">
 </head>
 <body>
+
     <div class="timer-container">
         <div id="status">Preparado</div>
+        
         <div id="display">00:00</div>
 
         <div class="controls-grid">
             <div class="control-group">
-                <button onclick="adjustTime('min', 1)">+ Min</button>
-                <button onclick="adjustTime('min', -1)">- Min</button>
+                <button class="btn-triangle" onclick="adjustTime('min', 1)">▲</button>
+                <span class="label-tech">MIN</span>
+                <button class="btn-triangle" onclick="adjustTime('min', -1)">▼</button>
             </div>
             <div class="control-group">
-                <button onclick="adjustTime('sec', 1)">+ Seg</button>
-                <button onclick="adjustTime('sec', -1)">- Seg</button>
+                <button class="btn-triangle" onclick="adjustTime('sec', 1)">▲</button>
+                <span class="label-tech">SEG</span>
+                <button class="btn-triangle" onclick="adjustTime('sec', -1)">▼</button>
             </div>
         </div>
 
         <div class="action-buttons">
-    <button id="startBtn" class="btn-circle btn-green">▶</button>
-    <button id="stopBtn" class="btn-circle btn-red">■</button>
-    <button id="resetBtn" class="btn-circle btn-gray">⟲</button>
-</div>
+            <button id="startBtn" class="btn-circle btn-green">▶</button>
+            <button id="stopBtn" class="btn-circle btn-red">■</button>
+            <button id="resetBtn" class="btn-circle btn-gray">⟲</button>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
