@@ -63,14 +63,29 @@ body::before {
     text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para legibilidad */
 }
 
+/* Ajuste para el Display Fluido */
 #display { 
-    font-size: 8rem; /* Súper heroico */
+    /* clamp(minimo, preferido, maximo) */
+    font-size: clamp(4rem, 15vw, 8rem); 
     font-weight: 900; 
-    margin-bottom: 10px; 
+    margin-bottom: 5px; 
     color: #00e676; 
-    text-shadow: 0 0 25px rgba(0, 230, 118, 0.6); /* Glow potente */
+    text-shadow: 0 0 20px rgba(0, 230, 118, 0.4); 
     font-variant-numeric: tabular-nums; 
-    letter-spacing: -6px; /* Números muy compactos */
+    letter-spacing: -2px; /* Reduje un poco el espaciado negativo para que no se pise */
+}
+
+/* Ajuste del contenedor para celulares */
+.timer-container { 
+    text-align: center;
+    width: 95%; /* Ocupa casi todo el ancho en móviles */
+    max-width: 400px;
+    background: rgba(26, 26, 26, 0.85); /* Un poco más transparente para ver a C-Bum */
+    padding: 20px; 
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px); /* Blur más marcado para separar del fondo */
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* 5. Controles de ajuste (+/-) */
